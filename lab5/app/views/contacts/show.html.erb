@@ -1,0 +1,19 @@
+<h1>Contact Info</h1>
+
+<p><strong>Name:</strong> <%= @contact.name %></p>
+<p><strong>User ID:</strong> <%= @contact.user_id %></p>
+
+<% if @contact.phone_numbers.any? %>
+  <p><strong>Phone Numbers:</strong></p>
+  <ul>
+    <% @contact.phone_numbers.each do |pn| %>
+      <li><%= pn.number %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><em>No phone numbers available.</em></p>
+<% end %>
+
+<%= link_to "Edit", edit_contact_path(@contact), class: "btn btn-warning" %>
+<%= button_to "Delete", contact_path(@contact), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<%= link_to "Back", contacts_path, class: "btn btn-secondary" %>

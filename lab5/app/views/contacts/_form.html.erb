@@ -1,0 +1,28 @@
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(contact.errors.count, "error") %> Something went wrong:</h4>
+      <ul>
+        <% contact.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, "Contact Name", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <%= form.fields_for :phone_numbers do |pn_form| %>
+    <div class="mb-3">
+      <%= pn_form.label :number, "Phone Number", class: "form-label" %>
+      <%= pn_form.text_field :number, class: "form-control" %>
+    </div>
+  <% end %>
+
+  <div class="actions mt-4">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
